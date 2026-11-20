@@ -1,0 +1,203 @@
+<div class="app-shell">
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="Trackline home">
+      <span class="brand-mark" aria-hidden="true">T</span>
+      <span>trackline</span>
+    </a>
+    <div class="workspace-label">
+      <span class="workspace-dot" aria-hidden="true"></span>
+      Product workspace
+    </div>
+    <button
+      class="button button-primary topbar-action"
+      type="button"
+      [disabled]="!store.readyForChanges()"
+      (click)="openCreateForm()"
+    >
+      <span aria-hidden="true">＋</span> New issue
+    </button>
+  </header>
+
+  <main class="main-content">
+    <section class="page-heading" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow">PROJECT / PLATFORM</p>
+        <h1 id="page-title">Issue board</h1>
+        <p class="page-description">Plan work, keep momentum, and ship great things together.</p>
+      </div>
+      <button
+        class="button button-quiet reset-button"
+        type="button"
+        [disabled]="store.loading()"
+        (click)="resetData()"
+      >
+        Reset data
+      </button>
+    </section>
+
+    @if (store.error()) {
+      <div class="notice notice-error" role="alert">
+        <span>{{ store.error() }}</span>
+        <button class="text-button" type="button" (click)="store.reload()">Try loading again</button>
+      </div>
+    }
+
+    @if (feedback()) {
+      <p class="feedback" role="status">{{ feedback() }}</p>
+    }
+
+    @if (store.loading()) {
+      <div class="loading-state" role="status">
+        <span class="spinner" aria-hidden="true"></span>
+        <span>Loading your issues…</span>
+      </div>
+    } @else {
+      <section class="summary-grid" aria-label="Project summary">
+        <article class="summary-card">
+          <span class="summary-icon summary-icon-open" aria-hidden="true">◷</span>
+          <div>
+            <p class="summary-label">Open issues</p>
+            <p class="summary-value">{{ store.openIssueCount() }}</p>
+          </div>
+          <span class="summary-note">Across all statuses</span>
+        </article>
+        <article class="summary-card">
+          <span class="summary-icon summary-icon-overdue" aria-hidden="true">!</span>
+          <div>
+            <p class="summary-label">Overdue</p>
+            <p class="summary-value">{{ store.overdueIssueCount() }}</p>
+          </div>
+          <span class="summary-note">Needs attention</span>
+        </article>
+        <article class="summary-card summary-card-progress">
+          <span class="summary-icon summary-icon-progress" aria-hidden="true">↗</span>
+          <div>
+            <p class="summary-label">Completion</p>
+            <p class="summary-value">{{ store.completionPercentage() }}<span>%</span></p>
+          </div>
+          <div
+            class="progress-track"
+            role="progressbar"
+            aria-label="Story point completion"
+            [attr.aria-valuenow]="store.completionPercentage()"
+            aria-valuemin="0"
+            aria-valuemax="100"
+          >
+            <span [style.width.%]="store.completionPercentage()"></span>
+          </div>
+        </article>
+      </section>
+
+      <section class="board-toolbar" aria-label="Board filters">
+        <div class="filters">
+          <label class="search-control">
+            <span class="sr-only">Search issues</span>
+            <span class="search-icon" aria-hidden="true">⌕</span>
+            <input
+              type="search"
+              placeholder="Search issues…"
+              [value]="store.searchText()"
+              (input)="store.setSearchText($any($event.target).value)"
+            />
+          </label>
+          <label class="filter-control">
+            <span class="sr-only">Filter by assignee</span>
+            <select
+              [value]="store.assigneeFilter()"
+              (change)="store.setAssigneeFilter($any($event.target).value)"
+            >
+              <option value="all">All assignees</option>
+              <option value="unassigned">Unassigned</option>
+              @for (member of store.team(); track member.id) {
+                <option [value]="member.id">{{ member.name }}</option>
+              }
+            </select>
+          </label>
+          <label class="filter-control">
+            <span class="sr-only">Filter by priority</span>
+            <select
+              [value]="store.priorityFilter()"
+              (change)="store.setPriorityFilter($any($event.target).value)"
+            >
+              <option value="all">All priorities</option>
+              @for (priority of store.priorities; track priority) {
+                <option [value]="priority">{{ priority }} priority</option>
+              }
+            </select>
+          </label>
+        </div>
+        <div class="filter-summary">
+          <span>Showing <strong>{{ store.filteredIssues().length }}</strong> of {{ store.issues().length }} issues</span>
+          <button class="text-button" type="button" (click)="clearFilters()">Clear filters</button>
+        </div>
+      </section>
+
+      @if (store.issues().length === 0) {
+        <section class="empty-state">
+          <span class="empty-illustration" aria-hidden="true">✳</span>
+          <h2>Your board is ready</h2>
+          <p>Create an issue to get your work moving.</p>
+          <button class="button button-primary" type="button" (click)="openCreateForm()">Create first issue</button>
+        </section>
+      } @else if (store.filteredIssues().length === 0) {
+        <section class="empty-state compact-empty">
+          <span class="empty-illustration" aria-hidden="true">⌕</span>
+          <h2>No matching issues</h2>
+          <p>Try changing your search or filters.</p>
+          <button class="button button-secondary" type="button" (click)="clearFilters()">Clear filters</button>
+        </section>
+      } @else {
+        <section class="board" aria-label="Kanban issue board">
+          @for (status of statuses; track status) {
+            <section class="board-column" [attr.aria-label]="status + ' issues'">
+              <header class="column-header">
+                <div class="column-heading">
+                  <span class="status-dot" [class]="'status-dot ' + store.statusClass(status)" aria-hidden="true"></span>
+                  <h2>{{ status }}</h2>
+                  <span class="column-count">{{ store.issuesByStatus()[status].length }}</span>
+                </div>
+                <span class="column-points">{{ store.pointsByStatus()[status] }} pts</span>
+              </header>
+              <div class="column-cards">
+                @for (issue of store.issuesByStatus()[status]; track issue.id) {
+                  <app-issue-card
+                    [issue]="issue"
+                    [assigneeName]="store.assigneeName(issue.assigneeId)"
+                    [overdue]="store.isOverdue(issue)"
+                    (selected)="selectIssue($event)"
+                  />
+                }
+                @if (store.issuesByStatus()[status].length === 0) {
+                  <p class="column-empty">No issues in this column</p>
+                }
+              </div>
+            </section>
+          }
+        </section>
+      }
+    }
+  </main>
+
+  @if (selectedIssue(); as issue) {
+    <app-issue-detail-panel
+      [issue]="issue"
+      [team]="store.team()"
+      [allowedTransitions]="store.allowedTransitions(issue.status)"
+      [assigneeName]="store.assigneeName(issue.assigneeId)"
+      [overdue]="store.isOverdue(issue)"
+      [feedback]="feedback()"
+      (closed)="closePanel()"
+      (saved)="saveIssue($event)"
+      (transitionRequested)="transitionIssue($event)"
+    />
+  }
+
+  @if (creatingIssue()) {
+    <app-create-issue-panel
+      [team]="store.team()"
+      [feedback]="feedback()"
+      (closed)="closePanel()"
+      (created)="createIssue($event)"
+    />
+  }
+</div>

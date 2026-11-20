@@ -1,0 +1,100 @@
+<div class="panel-backdrop" (click)="closed.emit()" (keydown.escape)="closed.emit()">
+  <aside class="create-panel" role="dialog" aria-modal="true" aria-labelledby="create-title" (click)="$event.stopPropagation()">
+    <header class="panel-header">
+      <div>
+        <p class="panel-kicker">NEW WORK ITEM</p>
+        <h2 id="create-title">Create an issue</h2>
+      </div>
+      <button class="icon-button" type="button" aria-label="Close create issue form" (click)="closed.emit()">×</button>
+    </header>
+
+    <form class="panel-body" (submit)="$event.preventDefault(); submit()">
+      @if (feedback()) {
+        <p class="panel-feedback" role="status">{{ feedback() }}</p>
+      }
+
+      <label class="field">
+        <span>Title <b aria-hidden="true">*</b></span>
+        <input
+          [formField]="issueForm.title"
+          placeholder="What needs to be done?"
+        />
+        @if (issueForm.title().touched() && issueForm.title().invalid()) {
+          @for (error of issueForm.title().errors(); track error.kind) {
+            <small>{{ error.message }}</small>
+          }
+        }
+      </label>
+
+      <label class="field">
+        <span>Description</span>
+        <textarea
+          rows="4"
+          [formField]="issueForm.description"
+          placeholder="Add context or acceptance criteria…"
+        ></textarea>
+      </label>
+
+      <div class="field-row">
+        <label class="field">
+          <span>Type</span>
+          <select [formField]="issueForm.type">
+            @for (type of types; track type) {
+              <option [value]="type">{{ type }}</option>
+            }
+          </select>
+        </label>
+        <label class="field">
+          <span>Priority</span>
+          <select [formField]="issueForm.priority">
+            @for (priority of priorities; track priority) {
+              <option [value]="priority">{{ priority }}</option>
+            }
+          </select>
+        </label>
+      </div>
+
+      <div class="field-row">
+        <label class="field">
+          <span>Story points</span>
+          <select [formField]="issueForm.storyPoints">
+            @for (points of pointValues; track points) {
+              <option [value]="points">{{ points }}</option>
+            }
+          </select>
+        </label>
+        <label class="field">
+          <span>Assignee</span>
+          <select [formField]="issueForm.assigneeId">
+            <option value="">Unassigned</option>
+            @for (member of team(); track member.id) {
+              <option [value]="member.id">{{ member.name }}</option>
+            }
+          </select>
+        </label>
+      </div>
+
+      <label class="field">
+        <span>Due date</span>
+        <input type="date" [min]="today" [formField]="issueForm.dueDate" />
+        @if (issueForm.dueDate().touched() && issueForm.dueDate().invalid()) {
+          @for (error of issueForm.dueDate().errors(); track error.kind) {
+            <small>{{ error.message }}</small>
+          }
+        }
+      </label>
+
+      <div class="form-note">
+        <span class="note-icon" aria-hidden="true">i</span>
+        New issues are added to the To Do column.
+      </div>
+    </form>
+
+    <footer class="panel-footer">
+      <button class="button button-secondary" type="button" (click)="closed.emit()">Cancel</button>
+      <button class="button button-primary" type="button" [disabled]="!valid()" (click)="submit()">
+        Create issue
+      </button>
+    </footer>
+  </aside>
+</div>

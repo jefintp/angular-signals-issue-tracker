@@ -1,0 +1,103 @@
+<div class="detail-layer">
+  <aside
+    class="detail-panel"
+    role="region"
+    [attr.aria-labelledby]="'detail-title-' + issue().id"
+  >
+    <header class="panel-header">
+      <div>
+        <p class="panel-kicker">ISSUE DETAILS</p>
+        <h2 [id]="'detail-title-' + issue().id">{{ issue().id }}</h2>
+      </div>
+      <button class="icon-button" type="button" aria-label="Close issue details" (click)="closed.emit()">×</button>
+    </header>
+
+    <div class="panel-body">
+      @if (feedback()) {
+        <p class="panel-feedback" role="status">{{ feedback() }}</p>
+      }
+
+      <label class="field">
+        <span>Title</span>
+        <input [formField]="issueForm.title" />
+        @if (issueForm.title().touched() && issueForm.title().invalid()) {
+          @for (error of issueForm.title().errors(); track error.kind) {
+            <small>{{ error.message }}</small>
+          }
+        }
+      </label>
+
+      <div class="read-only-field">
+        <span>Description</span>
+        <p>{{ issue().description }}</p>
+      </div>
+
+      <div class="field-row">
+        <label class="field">
+          <span>Type</span>
+          <div class="read-only-input">{{ issue().type }}</div>
+        </label>
+        <label class="field">
+          <span>Priority</span>
+          <select [formField]="issueForm.priority">
+            @for (priority of priorities; track priority) {
+              <option [value]="priority">{{ priority }}</option>
+            }
+          </select>
+        </label>
+      </div>
+
+      <div class="field-row">
+        <label class="field">
+          <span>Assignee</span>
+          <select [formField]="issueForm.assigneeId">
+            <option value="">Unassigned</option>
+            @for (member of team(); track member.id) {
+              <option [value]="member.id">{{ member.name }}</option>
+            }
+          </select>
+        </label>
+        <label class="field">
+          <span>Story points</span>
+          <select [formField]="issueForm.storyPoints">
+            @for (points of pointValues; track points) {
+              <option [value]="points">{{ points }}</option>
+            }
+          </select>
+        </label>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <span>Status</span>
+          <div class="read-only-input">{{ issue().status }}</div>
+        </div>
+        <label class="field">
+          <span>Due date</span>
+          <input type="date" [formField]="issueForm.dueDate" />
+        </label>
+      </div>
+      @if (overdue()) {
+        <p class="overdue-note">This issue is overdue.</p>
+      }
+
+      <section class="transition-section" aria-label="Available status transitions">
+        <h3>Move issue</h3>
+        <div class="transition-actions">
+          @for (status of allowedTransitions(); track status) {
+            <button class="transition-button" type="button" (click)="transition(status)">
+              Move to {{ status }}
+            </button>
+          }
+        </div>
+      </section>
+    </div>
+
+    <footer class="panel-footer">
+      <button class="button button-secondary" type="button" (click)="closed.emit()">Cancel</button>
+      <button class="button button-primary" type="button" [disabled]="!valid()" (click)="save()">
+        Save changes
+      </button>
+    </footer>
+  </aside>
+</div>

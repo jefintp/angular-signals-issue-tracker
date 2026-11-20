@@ -1,0 +1,25 @@
+<button
+  class="issue-card"
+  type="button"
+  [attr.aria-label]="'Open ' + issue().id + ': ' + issue().title"
+  (click)="selected.emit(issue().id)"
+>
+  <div class="card-topline">
+    <span class="issue-id">{{ issue().id }}</span>
+    <span class="story-points">{{ issue().storyPoints }} pts</span>
+  </div>
+  <h3>{{ issue().title }}</h3>
+  <div class="card-labels">
+    <span class="type-label">{{ issue().type }}</span>
+    <span class="priority-label" [class]="'priority-label priority-' + issue().priority.toLowerCase()">
+      {{ issue().priority }}
+    </span>
+  </div>
+  <div class="card-footer">
+    <span class="assignee"><span class="avatar" aria-hidden="true">{{ assigneeName().slice(0, 1) }}</span>{{ assigneeName() }}</span>
+    <span class="due-date">{{ issue().dueDate ?? 'No due date' }}</span>
+  </div>
+  @if (overdue()) {
+    <span class="overdue-label">Overdue</span>
+  }
+</button>

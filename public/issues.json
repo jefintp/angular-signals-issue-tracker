@@ -1,0 +1,222 @@
+[
+  {
+    "id": "TRK-101",
+    "title": "Investigate intermittent login failures",
+    "description": "Review authentication logs and identify why a small number of sign-in attempts fail.",
+    "type": "Bug",
+    "priority": "Critical",
+    "status": "In Progress",
+    "assigneeId": "member-olivia",
+    "storyPoints": 5,
+    "dueDate": "2026-11-18"
+  },
+  {
+    "id": "TRK-102",
+    "title": "Refresh account settings layout",
+    "description": "Align account settings with the updated design system and improve mobile spacing.",
+    "type": "Task",
+    "priority": "High",
+    "status": "In Progress",
+    "assigneeId": "member-olivia",
+    "storyPoints": 3,
+    "dueDate": "2026-11-25"
+  },
+  {
+    "id": "TRK-103",
+    "title": "Add saved views to the issue list",
+    "description": "Allow users to save a combination of issue filters for later use.",
+    "type": "Story",
+    "priority": "Medium",
+    "status": "In Progress",
+    "assigneeId": "member-olivia",
+    "storyPoints": 8,
+    "dueDate": "2026-11-29"
+  },
+  {
+    "id": "TRK-104",
+    "title": "Fix duplicate notification emails",
+    "description": "Prevent repeated delivery when a notification job retries after a timeout.",
+    "type": "Bug",
+    "priority": "High",
+    "status": "To Do",
+    "assigneeId": "member-marcus",
+    "storyPoints": 3,
+    "dueDate": "2026-11-15"
+  },
+  {
+    "id": "TRK-105",
+    "title": "Document workspace permissions",
+    "description": "Write a concise guide explaining roles, access levels, and common permission tasks.",
+    "type": "Task",
+    "priority": "Low",
+    "status": "To Do",
+    "assigneeId": null,
+    "storyPoints": 2,
+    "dueDate": null
+  },
+  {
+    "id": "TRK-106",
+    "title": "Create audit history for project updates",
+    "description": "Capture who changed project settings and when those changes were made.",
+    "type": "Story",
+    "priority": "Medium",
+    "status": "In Review",
+    "assigneeId": "member-priya",
+    "storyPoints": 5,
+    "dueDate": "2026-11-22"
+  },
+  {
+    "id": "TRK-107",
+    "title": "Resolve board keyboard navigation issue",
+    "description": "Ensure issue cards and board filters can be reached in a predictable tab order.",
+    "type": "Bug",
+    "priority": "High",
+    "status": "To Do",
+    "assigneeId": null,
+    "storyPoints": 2,
+    "dueDate": "2026-11-17"
+  },
+  {
+    "id": "TRK-108",
+    "title": "Add team member workload overview",
+    "description": "Show each team member's current in-progress issue count in the project view.",
+    "type": "Story",
+    "priority": "Low",
+    "status": "To Do",
+    "assigneeId": "member-alex",
+    "storyPoints": 8,
+    "dueDate": "2026-12-05"
+  },
+  {
+    "id": "TRK-109",
+    "title": "Improve CSV export error messages",
+    "description": "Explain which rows could not be exported and how to correct common data issues.",
+    "type": "Task",
+    "priority": "Medium",
+    "status": "Done",
+    "assigneeId": "member-marcus",
+    "storyPoints": 3,
+    "dueDate": "2026-11-10"
+  },
+  {
+    "id": "TRK-110",
+    "title": "Fix timezone offset in date picker",
+    "description": "Keep selected dates stable when users work in time zones ahead of UTC.",
+    "type": "Bug",
+    "priority": "Critical",
+    "status": "In Review",
+    "assigneeId": "member-priya",
+    "storyPoints": 5,
+    "dueDate": "2026-11-20"
+  },
+  {
+    "id": "TRK-111",
+    "title": "Add project onboarding checklist",
+    "description": "Guide new project members through profile, notification, and workspace setup.",
+    "type": "Story",
+    "priority": "Low",
+    "status": "To Do",
+    "assigneeId": "member-alex",
+    "storyPoints": 3,
+    "dueDate": "2026-12-12"
+  },
+  {
+    "id": "TRK-112",
+    "title": "Reduce dashboard initial load time",
+    "description": "Profile the dashboard data requests and remove unnecessary startup work.",
+    "type": "Task",
+    "priority": "High",
+    "status": "In Progress",
+    "assigneeId": "member-marcus",
+    "storyPoints": 8,
+    "dueDate": "2026-11-27"
+  },
+  {
+    "id": "TRK-113",
+    "title": "Clarify invite expiration behavior",
+    "description": "Make invite expiry visible and offer a simple resend action for workspace admins.",
+    "type": "Bug",
+    "priority": "Medium",
+    "status": "In Review",
+    "assigneeId": "member-alex",
+    "storyPoints": 2,
+    "dueDate": "2026-11-19"
+  },
+  {
+    "id": "TRK-114",
+    "title": "Support project labels",
+    "description": "Let teams categorize work using a small set of project-specific labels.",
+    "type": "Story",
+    "priority": "Medium",
+    "status": "Done",
+    "assigneeId": "member-priya",
+    "storyPoints": 5,
+    "dueDate": "2026-11-08"
+  },
+  {
+    "id": "TRK-115",
+    "title": "Update empty states across the workspace",
+    "description": "Use consistent guidance when lists, dashboards, and saved views have no content.",
+    "type": "Task",
+    "priority": "Low",
+    "status": "To Do",
+    "assigneeId": null,
+    "storyPoints": 1,
+    "dueDate": null
+  },
+  {
+    "id": "TRK-116",
+    "title": "Fix stale avatar after profile update",
+    "description": "Refresh the visible profile image immediately after a member uploads a new one.",
+    "type": "Bug",
+    "priority": "High",
+    "status": "To Do",
+    "assigneeId": "member-marcus",
+    "storyPoints": 2,
+    "dueDate": "2026-11-28"
+  },
+  {
+    "id": "TRK-117",
+    "title": "Add sprint planning notes",
+    "description": "Provide a lightweight text area for capturing planning decisions with a sprint.",
+    "type": "Story",
+    "priority": "Medium",
+    "status": "In Progress",
+    "assigneeId": "member-priya",
+    "storyPoints": 3,
+    "dueDate": "2026-11-30"
+  },
+  {
+    "id": "TRK-118",
+    "title": "Review accessibility color contrast",
+    "description": "Check text and control contrast in light mode and document any adjustments needed.",
+    "type": "Task",
+    "priority": "Low",
+    "status": "In Review",
+    "assigneeId": "member-alex",
+    "storyPoints": 2,
+    "dueDate": "2026-12-03"
+  },
+  {
+    "id": "TRK-119",
+    "title": "Add retry action for failed imports",
+    "description": "Allow users to retry an import after correcting the source file.",
+    "type": "Story",
+    "priority": "High",
+    "status": "Done",
+    "assigneeId": "member-marcus",
+    "storyPoints": 5,
+    "dueDate": "2026-11-12"
+  },
+  {
+    "id": "TRK-120",
+    "title": "Review project notification defaults",
+    "description": "Agree on sensible notification settings for newly created projects.",
+    "type": "Task",
+    "priority": "Low",
+    "status": "To Do",
+    "assigneeId": null,
+    "storyPoints": 1,
+    "dueDate": null
+  }
+]

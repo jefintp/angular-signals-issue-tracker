@@ -1,0 +1,92 @@
+:root {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: #202b42;
+  background: #f7f8fa;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 360px;
+  min-height: 100vh;
+  margin: 0;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+.button {
+  min-height: 39px;
+  padding: 0 15px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 650;
+  transition: background 140ms ease, border-color 140ms ease, transform 140ms ease;
+}
+
+.button:hover {
+  transform: translateY(-1px);
+}
+
+.button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  transform: none;
+}
+
+.button:focus-visible,
+.text-button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+.issue-card:focus-visible,
+.icon-button:focus-visible {
+  outline: 3px solid #aebeff;
+  outline-offset: 2px;
+}
+
+.button-primary {
+  background: #335cf4;
+  color: #fff;
+}
+
+.button-primary:hover {
+  background: #244bdd;
+}
+
+.button-secondary {
+  border-color: #dce1ea;
+  background: #fff;
+  color: #34415b;
+}
+
+.button-quiet {
+  border-color: #e2e6ee;
+  background: transparent;
+  color: #69758b;
+}
+
+.text-button {
+  padding: 3px;
+  border: 0;
+  background: transparent;
+  color: #4262e8;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 650;
+}
+
+.icon-button {
+  cursor: pointer;
+}

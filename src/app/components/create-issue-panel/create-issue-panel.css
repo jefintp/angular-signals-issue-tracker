@@ -1,0 +1,177 @@
+:host {
+  position: fixed;
+  z-index: 20;
+  inset: 0;
+}
+
+.panel-backdrop {
+  display: flex;
+  height: 100%;
+  justify-content: flex-end;
+  background: rgb(25 36 58 / 30%);
+}
+
+.create-panel {
+  display: flex;
+  width: min(100%, 490px);
+  height: 100%;
+  flex-direction: column;
+  background: #fff;
+  box-shadow: -12px 0 38px rgb(24 37 60 / 13%);
+  animation: slide-in 180ms ease-out;
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 25px 19px;
+  border-bottom: 1px solid #edf0f4;
+}
+
+.panel-kicker {
+  margin: 0 0 5px;
+  color: #8994a7;
+  font-size: 9px;
+  font-weight: 750;
+  letter-spacing: 1px;
+}
+
+.panel-header h2 {
+  margin: 0;
+  color: #24314a;
+  font-size: 18px;
+}
+
+.icon-button {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border: 0;
+  border-radius: 8px;
+  background: #f2f4f8;
+  color: #667289;
+  cursor: pointer;
+  font-size: 23px;
+}
+
+.panel-body {
+  flex: 1;
+  padding: 22px 25px;
+  overflow-y: auto;
+}
+
+.field {
+  display: grid;
+  gap: 7px;
+  margin-bottom: 17px;
+}
+
+.field > span {
+  color: #6e7a90;
+  font-size: 11px;
+  font-weight: 650;
+}
+
+.field b {
+  color: #c84f40;
+}
+
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  min-height: 39px;
+  padding: 9px 10px;
+  border: 1px solid #e0e5ed;
+  border-radius: 7px;
+  background: #fff;
+  color: #34415a;
+  font-size: 12px;
+}
+
+.field textarea {
+  min-height: 92px;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+.field select {
+  cursor: pointer;
+}
+
+.field small {
+  color: #bd4d3e;
+  font-size: 10px;
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.panel-feedback {
+  margin: 0 0 14px;
+  color: #4c5d79;
+  font-size: 11px;
+}
+
+.form-note {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px;
+  border-radius: 7px;
+  background: #f4f6fb;
+  color: #78849a;
+  font-size: 10px;
+}
+
+.note-icon {
+  display: grid;
+  width: 17px;
+  height: 17px;
+  place-items: center;
+  border-radius: 50%;
+  background: #e3e9fb;
+  color: #6075c7;
+  font-size: 10px;
+  font-weight: 750;
+}
+
+.panel-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 9px;
+  padding: 15px 25px;
+  border-top: 1px solid #edf0f4;
+  background: #fff;
+}
+
+.button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  transform: none;
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateX(20px);
+    opacity: 0.6;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 520px) {
+  .panel-header,
+  .panel-body,
+  .panel-footer {
+    padding-right: 17px;
+    padding-left: 17px;
+  }
+}
