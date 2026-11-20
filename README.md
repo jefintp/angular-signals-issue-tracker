@@ -1,3 +1,9 @@
+## Demo
+
+[Watch the issue tracker demo](./demo/issue-tracker.mp4)
+
+
+
 # Trackline Issue Tracker
 
 A Kanban-style issue tracker built with Angular 22 standalone components and Signals.
